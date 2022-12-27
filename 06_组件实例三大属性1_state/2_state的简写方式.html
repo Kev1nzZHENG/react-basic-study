@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06_组件实例三大属性1_state</title>
+</head>
+
+<body>
+    <!-- 准备好一个"容器" -->
+    <div id="test">
+
+    </div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom扩展库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 创建类式组件
+        class Weather extends React.Component {
+            // 1、初始化状态
+            state = {
+                isHot: true
+            }
+            render() {
+                return (
+                    <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+                )
+            }
+            // 自定义方法—— 要用赋值语句的形式 + 箭头函数
+            // 直接赋值： 该变量/函数挂载在实例自身
+            changeWeather = () => {
+                let { isHot } = this.state;
+                this.setState({
+                    isHot: !isHot
+                })
+            }
+        }
+        // 渲染组件到页面
+        ReactDOM.render(<Weather />, document.querySelector('#test'));
+
+
+    </script>
+</body>
+
+</html>

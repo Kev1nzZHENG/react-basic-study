@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1_非受控组件</title>
+</head>
+
+<body>
+    <!-- 准备好一个"容器" -->
+    <div id="test">
+
+    </div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom扩展库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        class Login extends React.Component {
+            username = React.createRef();
+            password = React.createRef();
+            handleSubmit = (event) => {
+                event.preventDefault();
+                const { username, password } = this;
+                alert(`你输入的用户名是${username.current.value}，你输入的密码是${password.current.value}`)
+            }
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        用户名：<input type="text" name="username" ref={this.username} />
+                        密码：<input type="text" name="password" ref={this.password} />
+                        <button>登陆</button>
+                    </form>
+                )
+            }
+        }
+        ReactDOM.render(<Login />, document.querySelector('#test'))
+    </script>
+</body>
+
+</html>

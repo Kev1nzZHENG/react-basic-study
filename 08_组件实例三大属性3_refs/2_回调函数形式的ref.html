@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_回调函数形式的ref</title>
+</head>
+
+<body>
+    <!-- 准备好一个"容器" -->
+    <div id="test">
+
+    </div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom扩展库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // ref使用回调函数形式：把当前节点挂载在实例中；
+        class Demo extends React.Component {
+            showData1 = () => {
+                const { input1 } = this;
+                alert(input1.value)
+            }
+            showData2 = () => {
+                const { input2 } = this;
+                alert(input2.value)
+            }
+            render() {
+                return (
+                    <div>
+                        <input ref={(currentNode) => { this.input1 = currentNode }} type="text" placeholder="点击按钮提示数据" />
+                        <button onClick={this.showData1}>点我提示左侧的数据</button>
+                        <input onBlur={this.showData2} ref={(currentNode) => { this.input2 = currentNode }} type="text" placeholder="失去焦点提示数据" />
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Demo />, document.querySelector('#test'))
+    </script>
+</body>
+
+</html>
